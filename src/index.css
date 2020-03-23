@@ -1,13 +1,269 @@
-body {
+html {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: 'Raleway', sans-serif;
+  background-color: black;
+  background-image: linear-gradient(326deg, #bd4f6c 0%, #d7816a 74%);
+  font-size: 18px;
+  height: 100%;
+  line-height: 1.2;
+  background-attachment: fixed;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+button {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+#root {
+  min-height: 100%;
+  width: 100%;
+  position: relative;
+  padding: 1rem 3rem;
+}
+
+.box {
+  box-shadow: 0 0.2px 0.6px rgba(0, 0, 0, 0.022), 0 0.5px 1.5px rgba(0, 0, 0, 0.031),
+    0 1.1px 3px rgba(0, 0, 0, 0.039), 0 2.2px 6.2px rgba(0, 0, 0, 0.048),
+    0 6px 17px rgba(0, 0, 0, 0.07);
+  border-radius: 0.2rem;
+}
+
+.app {
+  position: relative;
+  text-align: center;
+  margin: 1rem auto;
+  background: white;
+  padding: 1rem;
+  max-width: 18rem;
+  min-height: 15rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0.2px 3.2px rgba(0, 0, 0, 0.02), 0 0.4px 7.6px rgba(0, 0, 0, 0.028),
+    0 0.8px 14.4px rgba(0, 0, 0, 0.035), 0 1.3px 25.7px rgba(0, 0, 0, 0.042),
+    0 2.5px 48px rgba(0, 0, 0, 0.05), 0 6px 115px rgba(0, 0, 0, 0.07);
+}
+
+.title {
+  align-self: stretch;
+  margin: 0 -3rem;
+  padding: 1rem;
+  font-size: 1.5rem;
+  background-color: #ee9617;
+  background-image: linear-gradient(146deg, #bd4f6c 0%, #bd4f94 74%);
+  color: white;
+  font-weight: 500;
+  letter-spacing: 0.05rem;
+}
+
+.counter {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+.counter--label {
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  padding-left: 0.2rem;
+  color: #263238;
+}
+
+.counter--buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.2rem;
+}
+
+.counter--buttons span {
+  flex: 1;
+  font-weight: 700;
+  color: white;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+}
+
+.counter--buttons button {
+  border: none;
+  background: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  border-radius: 0.2rem;
+}
+.counter--buttons button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.counter--buttons button svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.menu {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+.menu--block {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.menu--line {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 0.2rem;
+  padding: 0.5rem 0.5rem;
+}
+.menu--line:nth-child(odd) {
+  background: #eceff1;
+}
+
+.menu--selects {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.menu--selects select {
+  display: block;
+  background: #01579b;
+  color: white;
+  border: none;
+  font-size: 1rem;
+  width: 50%;
+}
+
+.menu--meal {
+  flex: 1;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+.menu--meal:last-child {
+  margin-top: 0.5rem;
+}
+
+.menu--meal p {
+  margin: 0;
+  text-transform: uppercase;
+  text-align: left;
+  margin-right: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  color: #263238;
+}
+
+.menu--day {
+  flex: 1;
+  text-align: left;
+  margin: 0;
+  font-weight: 600;
+  border-radius: 0.2rem;
+  color: #050930;
+  text-transform: capitalize;
+}
+
+.menu--label {
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  padding-left: 0.2rem;
+  color: #263238;
+}
+
+.needs {
+  transition-duration: 0.3s;
+  margin: 1rem -1rem;
+  padding: 1rem;
+  margin-bottom: -1rem;
+  align-self: stretch;
+  bottom: 3rem;
+  background: white;
+  border-radius: 0.2rem;
+}
+.needs.active {
+  margin: 1rem -3rem;
+  box-shadow: 0 0.2px 0.6px rgba(0, 0, 0, 0.022), 0 0.5px 1.5px rgba(0, 0, 0, 0.031),
+    0 1.1px 3px rgba(0, 0, 0, 0.039), 0 2.2px 6.2px rgba(0, 0, 0, 0.048),
+    0 6px 17px rgba(0, 0, 0, 0.07);
+}
+
+.needs--label {
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
+  margin-bottom: 0.2rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05rem;
+  padding-left: 0.2rem;
+  color: #263238;
+}
+
+.need {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  border-radius: 0.2rem;
+  color: white;
+  margin-top: 1rem;
+  opacity: 1;
+  transition-duration: 0.3s;
+}
+.need:hover {
+  opacity: 0.8;
+}
+
+.need h2 {
+  font-weight: 700;
+  color: white;
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.need p {
+  font-weight: 500;
+  color: white;
+  font-size: 1rem;
+  margin: 0;
+  margin-top: 0.5rem;
 }
