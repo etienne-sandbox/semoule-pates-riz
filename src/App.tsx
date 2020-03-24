@@ -168,7 +168,7 @@ export function App() {
                         );
                       }}
                     >
-                      <option value="pates">Pates</option>
+                      <option value="pates">Pâtes</option>
                       <option value="riz">Riz</option>
                       <option value="semoule">Semoule</option>
                     </select>
@@ -187,7 +187,7 @@ export function App() {
         >
           <h2>{total.patesKg}kg de pates</h2>
           <p>
-            Soit {total.patesPack} {total.patesPack > 1 ? 'paquets' : 'paquet'} paquet de 500g
+            Soit {total.patesPack} {total.patesPack > 1 ? 'paquets' : 'paquet'} de 500g
           </p>
         </div>
         <div
