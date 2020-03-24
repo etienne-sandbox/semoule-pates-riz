@@ -185,7 +185,7 @@ export function App() {
           className="need"
           style={{ backgroundImage: 'linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%)' }}
         >
-          <h2>{total.patesKg}kg de pates</h2>
+          <h2>{total.patesKg}kg de pâtes</h2>
           <p>
             Soit {total.patesPack} {total.patesPack > 1 ? 'paquets' : 'paquet'} de 500g
           </p>
