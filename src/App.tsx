@@ -186,21 +186,27 @@ export function App() {
           style={{ backgroundImage: 'linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%)' }}
         >
           <h2>{total.patesKg}kg de pates</h2>
-          <p>Soit {total.patesPack} paquet de 500g</p>
+          <p>
+            Soit {total.patesPack} {total.patesPack > 1 ? 'paquets' : 'paquet'} paquet de 500g
+          </p>
         </div>
         <div
           className="need"
           style={{ backgroundImage: 'linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%)' }}
         >
           <h2>{total.rizKg}kg de riz</h2>
-          <p>Soit {total.rizPack} paquet de 500g</p>
+          <p>
+            Soit {total.rizPack} {total.rizPack > 1 ? 'paquets' : 'paquet'} de 500g
+          </p>
         </div>
         <div
           className="need"
           style={{ backgroundImage: 'linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%)' }}
         >
           <h2>{total.semouleKg}kg de semoule</h2>
-          <p>Soit {total.semoulePack} paquet de 500g</p>
+          <p>
+            Soit {total.semoulePack} {total.semoulePack > 1 ? 'paquets' : 'paquet'} de 500g
+          </p>
         </div>
       </div>
     </div>
