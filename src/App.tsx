@@ -5,9 +5,12 @@ import { Counter } from './Counter';
 
 type Menu = 'pates' | 'riz' | 'semoule';
 
-type MenuJour = { midi: Menu; soir: Menu };
+interface MenuJour {
+  midi: Menu;
+  soir: Menu;
+};
 
-type MenuSemaine = {
+interface MenuSemaine {
   lundi: MenuJour;
   mardi: MenuJour;
   mercredi: MenuJour;
