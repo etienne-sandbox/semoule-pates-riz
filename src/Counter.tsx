@@ -1,6 +1,6 @@
-import React from 'react';
-import { ReactComponent as PlusSquare } from './icons/plus-square.svg';
-import { ReactComponent as MinusSquare } from './icons/minus-square.svg';
+import React from "react";
+import { ReactComponent as PlusSquare } from "./icons/plus-square.svg";
+import { ReactComponent as MinusSquare } from "./icons/minus-square.svg";
 
 interface Props {
   value: number;
@@ -12,15 +12,15 @@ interface Props {
   background: string;
 }
 
-export const Counter: React.FC<Props> = ({
+export function Counter({
   label,
   onDecrement,
   onIncrement,
   unitPlural,
   unitSingle,
   value,
-  background
-}) => {
+  background,
+}: Props): React.ReactNode {
   return (
     <div className="counter">
       <p className="counter--label">{label}</p>
@@ -37,4 +37,4 @@ export const Counter: React.FC<Props> = ({
       </div>
     </div>
   );
-};
+}
