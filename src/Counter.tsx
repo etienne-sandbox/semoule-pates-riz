@@ -20,7 +20,7 @@ export function Counter({
   unitSingle,
   value,
   background,
-}: Props): React.ReactNode {
+}: Props): React.ReactElement {
   return (
     <div className="counter">
       <p className="counter--label">{label}</p>
