@@ -100,7 +100,6 @@ export function App() {
     <div className="box app">
       <h1 className="box title">Semoule - Pâtes - Riz</h1>
       <Counter
-        header={<div>Hello React !</div>}
         value={personnes.value}
         label="Nombre de personnes"
         onDecrement={() => personnes.decrement()}
