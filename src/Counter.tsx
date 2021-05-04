@@ -1,8 +1,8 @@
-import React from "react";
 import { ReactComponent as PlusSquare } from "./icons/plus-square.svg";
 import { ReactComponent as MinusSquare } from "./icons/minus-square.svg";
 
 interface Props {
+  header?: React.ReactElement | null;
   value: number;
   onIncrement: () => void;
   onDecrement: () => void;
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export function Counter({
+  header = null,
   label,
   onDecrement,
   onIncrement,
@@ -23,6 +24,7 @@ export function Counter({
 }: Props): React.ReactElement {
   return (
     <div className="counter">
+      {header}
       <p className="counter--label">{label}</p>
       <div className="counter--buttons" style={{ backgroundImage: background }}>
         <button onClick={onDecrement}>

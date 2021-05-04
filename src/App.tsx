@@ -1,14 +1,14 @@
-import React from 'react';
-import produce from 'immer';
-import { useCounter } from './useCounter';
-import { Counter } from './Counter';
+import produce from "immer";
+import { useCounter } from "./useCounter";
+import { Counter } from "./Counter";
+import { useEffect, useMemo, useState } from "react";
 
-type Menu = 'pates' | 'riz' | 'semoule';
+type Menu = "pates" | "riz" | "semoule";
 
 interface MenuJour {
   midi: Menu;
   soir: Menu;
-};
+}
 
 interface MenuSemaine {
   lundi: MenuJour;
@@ -18,9 +18,17 @@ interface MenuSemaine {
   vendredi: MenuJour;
   samedi: MenuJour;
   dimanche: MenuJour;
-};
+}
 
-const JOURS = ['lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche'] as const;
+const JOURS = [
+  "lundi",
+  "mardi",
+  "mercredi",
+  "jeudi",
+  "vendredi",
+  "samedi",
+  "dimanche",
+] as const;
 
 export function App() {
   const personnes = useCounter(2);
@@ -28,39 +36,44 @@ export function App() {
   const portionPates = useCounter(70, { step: 5, min: 10, max: 200 });
   const portionRiz = useCounter(60, { step: 5, min: 10, max: 200 });
   const portionSemoule = useCounter(80, { step: 5, min: 10, max: 200 });
-  const [menu, setMenu] = React.useState<MenuSemaine>({
-    lundi: { midi: 'pates', soir: 'riz' },
-    mardi: { midi: 'semoule', soir: 'pates' },
-    mercredi: { midi: 'riz', soir: 'semoule' },
-    jeudi: { midi: 'pates', soir: 'riz' },
-    vendredi: { midi: 'semoule', soir: 'pates' },
-    samedi: { midi: 'riz', soir: 'semoule' },
-    dimanche: { midi: 'pates', soir: 'riz' }
+  const [menu, setMenu] = useState<MenuSemaine>({
+    lundi: { midi: "pates", soir: "riz" },
+    mardi: { midi: "semoule", soir: "pates" },
+    mercredi: { midi: "riz", soir: "semoule" },
+    jeudi: { midi: "pates", soir: "riz" },
+    vendredi: { midi: "semoule", soir: "pates" },
+    samedi: { midi: "riz", soir: "semoule" },
+    dimanche: { midi: "pates", soir: "riz" },
   });
-  const [isBottom, setIsBottom] = React.useState(() => getScrollPercent() > 0.95);
+  const [isBottom, setIsBottom] = useState(() => getScrollPercent() > 0.95);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onScroll = () => {
       setIsBottom(getScrollPercent() > 0.95);
     };
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener("scroll", onScroll);
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
-  const total = React.useMemo(() => {
-    const all = JOURS.map(j => menu[j]).reduce<Array<Menu>>(
+  const total = useMemo(() => {
+    const all = JOURS.map((j) => menu[j]).reduce<Array<Menu>>(
       (acc, item) => [...acc, item.midi, item.soir],
       []
     );
-    const pates = all.filter(v => v === 'pates').length;
-    const riz = all.filter(v => v === 'riz').length;
-    const semoule = all.filter(v => v === 'semoule').length;
 
-    const patesKg = (pates * personnes.value * semaines.value * portionPates.value) / 1000;
-    const rizKg = (riz * personnes.value * semaines.value * portionRiz.value) / 1000;
-    const semouleKg = (semoule * personnes.value * semaines.value * portionSemoule.value) / 1000;
+    const pates = all.filter((v) => v === "pates").length;
+    const riz = all.filter((v) => v === "riz").length;
+    const semoule = all.filter((v) => v === "semoule").length;
+
+    const patesKg =
+      (pates * personnes.value * semaines.value * portionPates.value) / 1000;
+    const rizKg =
+      (riz * personnes.value * semaines.value * portionRiz.value) / 1000;
+    const semouleKg =
+      (semoule * personnes.value * semaines.value * portionSemoule.value) /
+      1000;
 
     const patesPack = Math.ceil(patesKg / 0.5);
     const rizPack = Math.ceil(rizKg / 0.5);
@@ -72,7 +85,7 @@ export function App() {
       semouleKg,
       patesPack,
       rizPack,
-      semoulePack
+      semoulePack,
     };
   }, [
     menu,
@@ -80,13 +93,14 @@ export function App() {
     portionPates.value,
     portionRiz.value,
     portionSemoule.value,
-    semaines.value
+    semaines.value,
   ]);
 
   return (
     <div className="box app">
       <h1 className="box title">Semoule - Pâtes - Riz</h1>
       <Counter
+        header={<div>Hello React !</div>}
         value={personnes.value}
         label="Nombre de personnes"
         onDecrement={() => personnes.decrement()}
@@ -134,7 +148,7 @@ export function App() {
       <div className="menu">
         <p className="menu--label">Menu de la semaine</p>
         <div className="menu--block">
-          {JOURS.map(jourName => {
+          {JOURS.map((jourName) => {
             const jour = menu[jourName];
             return (
               <div key={jourName} className="menu--line">
@@ -144,10 +158,10 @@ export function App() {
                     <p>Midi</p>
                     <select
                       value={jour.midi}
-                      onChange={e => {
+                      onChange={(e) => {
                         const value: Menu = e.target.value as any;
-                        setMenu(prev =>
-                          produce(prev, draft => {
+                        setMenu((prev) =>
+                          produce(prev, (draft) => {
                             draft[jourName].midi = value;
                           })
                         );
@@ -162,10 +176,10 @@ export function App() {
                     <p>Soir</p>
                     <select
                       value={jour.soir}
-                      onChange={e => {
+                      onChange={(e) => {
                         const value: Menu = e.target.value as any;
-                        setMenu(prev =>
-                          produce(prev, draft => {
+                        setMenu((prev) =>
+                          produce(prev, (draft) => {
                             draft[jourName].soir = value;
                           })
                         );
@@ -182,33 +196,42 @@ export function App() {
           })}
         </div>
       </div>
-      <div className={'needs' + (isBottom ? ' active' : '')}>
+      <div className={"needs" + (isBottom ? " active" : "")}>
         <p className="needs--label">Il vous faut</p>
         <div
           className="need"
-          style={{ backgroundImage: 'linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%)' }}
+          style={{
+            backgroundImage: "linear-gradient(315deg, #1fd1f9 0%, #b621fe 74%)",
+          }}
         >
           <h2>{total.patesKg}kg de pâtes</h2>
           <p>
-            Soit {total.patesPack} {total.patesPack > 1 ? 'paquets' : 'paquet'} de 500g
+            Soit {total.patesPack} {total.patesPack > 1 ? "paquets" : "paquet"}{" "}
+            de 500g
           </p>
         </div>
         <div
           className="need"
-          style={{ backgroundImage: 'linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%)' }}
+          style={{
+            backgroundImage: "linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%)",
+          }}
         >
           <h2>{total.rizKg}kg de riz</h2>
           <p>
-            Soit {total.rizPack} {total.rizPack > 1 ? 'paquets' : 'paquet'} de 500g
+            Soit {total.rizPack} {total.rizPack > 1 ? "paquets" : "paquet"} de
+            500g
           </p>
         </div>
         <div
           className="need"
-          style={{ backgroundImage: 'linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%)' }}
+          style={{
+            backgroundImage: "linear-gradient(315deg, #b1bfd8 0%, #6782b4 74%)",
+          }}
         >
           <h2>{total.semouleKg}kg de semoule</h2>
           <p>
-            Soit {total.semoulePack} {total.semoulePack > 1 ? 'paquets' : 'paquet'} de 500g
+            Soit {total.semoulePack}{" "}
+            {total.semoulePack > 1 ? "paquets" : "paquet"} de 500g
           </p>
         </div>
       </div>
@@ -219,7 +242,7 @@ export function App() {
 function getScrollPercent(): number {
   const h = document.documentElement;
   const b = document.body;
-  const st = 'scrollTop';
-  const sh = 'scrollHeight';
+  const st = "scrollTop";
+  const sh = "scrollHeight";
   return (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight);
 }
