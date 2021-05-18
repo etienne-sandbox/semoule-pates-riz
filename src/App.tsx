@@ -176,7 +176,7 @@ export function App() {
                     <select
                       value={jour.soir}
                       onChange={(e) => {
-                        const value: Menu = e.target.value as any;
+                        const value = e.target.value as Menu;
                         setMenu((prev) =>
                           produce(prev, (draft) => {
                             draft[jourName].soir = value;
