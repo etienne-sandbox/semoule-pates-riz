@@ -19,7 +19,7 @@ export function Counter({
   unitSingle,
   value,
   background,
-}: Props): React.ReactElement {
+}: Props): JSX.Element {
   return (
     <div className="counter">
       <p className="counter--label">{label}</p>
